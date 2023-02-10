@@ -1,0 +1,40 @@
+name: 'OIDC AWS Scanner - Tinder Security Labs'
+description: 'Analyze vulnerabilities in AWS / GHA OIDC setup.'
+inputs:
+  organization:
+    description: "Organization name that is being scanned"
+    required: false
+    default: ${{ github.repository_owner }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Org security validation
+      shell: bash
+      run: |
+        TARGET=${{ inputs.organization }}
+        if [[ "$TARGET" =~ ^[A-Z0-9a-z][A-Z0-9a-z-]{0,}[A-Z0-9a-z]$ ]]; then
+          echo "Valid target"
+        else
+          echo "Sorry the Target organization $TARGET is invalid"
+          exit 1
+        fi
+    - name: Get the JWT for assumption
+      uses: actions/github-script@v6
+      id: webtoken
+      with: 
+        script: |
+          const core_client = require('@actions/core')
+          let id_token = await core_client.getIDToken('sts.amazonaws.com')
+          return id_token
+        result-encoding: string
+    - name: Get ARNs
+      shell: bash
+      run: python ${{github.action_path}}/get_arns.py --type "org" --target "${{ inputs.organization }}"
+    - name: Check ARNs
+      shell: bash
+      run: python ${{github.action_path}}/scan_arns.py --token "${{ steps.webtoken.outputs.result }}" --target "${{ inputs.organization }}"
+    - name: Save output
+      uses: actions/upload-artifact@v3
+      with:
+        name: vulnerable-arns.json
+        path: scan_results/vulnerable-arns.json
