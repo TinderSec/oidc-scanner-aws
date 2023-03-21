@@ -1,3 +1,6 @@
+<p align="center">
+  <img width=50% height=50% src="static/TinderSecurity.png">
+</p>
 # GHA OIDC SCANNER - AWS by Tinder Security Labs
 
 ## ABOUT
@@ -5,7 +8,7 @@
 This is a GitHub Action built by Tinder Security Labs as part of public release of research done on configurations for AWS and GHA OIDC setups. This workflow allows organizations to monitor and identify vulnerabilities in their IAM roles through a black-box security approach. 
 
 ## Usage
-Use the following sample workflow and setup guidellines to setup and run this GHA in your organization. We recommend using this action in a **private** repository. 
+Use the following sample workflow and setup guidellines to setup and run this GHA in your organization. We recommend using this action in a **private** repository. We recommend creating a separate organization to test the roles, this will give coverage of scanning if `sub` headers are truly checked or not. Running in same organization can result false positive if a `sub` comparison is done only against the organization and not the repository.
 
 ### Scanning private repositories
 Replace the `${{ github.token }}` with a private PAT if you want to scan private/internal repositories. In order to securely store and use the API key, create a secret and replace `${{ github.token }}` with `${{ secrets.YOUR_SECRET_VAR }}`
