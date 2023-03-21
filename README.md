@@ -1,6 +1,7 @@
 <p align="center">
   <img width=50% height=50% src="static/TinderSecurity.png">
 </p>
+
 # GHA OIDC SCANNER - AWS by Tinder Security Labs
 
 ## ABOUT
