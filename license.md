@@ -1,4 +1,4 @@
-Copyright © 2022 Match Group, LLC
+Copyright © 2023 Match Group, LLC
 
 The copyright holder grants you permission to and use or redistribute this software in source and binary forms, with or without modification, conditioned on your acceptance of, and adherence to, the following conditions:
 

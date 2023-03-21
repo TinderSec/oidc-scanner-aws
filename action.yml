@@ -3,8 +3,7 @@ description: 'Analyze vulnerabilities in AWS / GHA OIDC setup.'
 inputs:
   organization:
     description: "Organization name that is being scanned"
-    required: false
-    default: ${{ github.repository_owner }}
+    required: true
 runs:
   using: 'composite'
   steps:

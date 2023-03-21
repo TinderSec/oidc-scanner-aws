@@ -38,6 +38,8 @@ jobs:
       - uses: TinderSec/oidc-scanner-aws@main
         env:
           PAT: ${{ github.token }}
+        with:
+          organization: ORG TO SCAN
 ```
 
 ## Output
@@ -54,7 +56,7 @@ If role(s) are found vulnerable, an artifact will be created in the ran job with
 
 ## License
 
-Copyright © 2022 Match Group, LLC
+Copyright © 2023 Match Group, LLC
 
 The copyright holder grants you permission to and use or redistribute this software in source and binary forms, with or without modification, conditioned on your acceptance of, and adherence to, the following conditions:
 
